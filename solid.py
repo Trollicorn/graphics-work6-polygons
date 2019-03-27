@@ -3,13 +3,33 @@ from draw import *
 from math import cos,sin,pi
 
 
-def box(edge, args): #[x,y,z,w,h,d]
+def add_poly(polygon,x0,y0,z0,x1,y1,z1,x2,y2,z2):
+    add_point(polygon,x0,y0,z0)
+    add_point(polygon,x1,y1,z1)
+    add_point(polygon,x2,y2,z2)
+
+def box(polygon, args): #[x,y,z,w,h,d]
     x = args[0]
     y = args[1]
     z = args[2]
     w = args[3] #width
     h = args[4] #height
     d = args[5] #depth
+    ex = x + w
+    ey = y - h
+    ez = z - d
+
+    #parallel xy plane
+    add_poly(polygon,ex, y, z, x, y, z, x,ey, z)
+    add_poly(polygon, x,ey, z,ex,ey, z,ex, y, z)
+    add_poly(polygon, x, y,ez, x,ey,ez,ex,ey,ez)
+    add_poly(polygon,ex,ey,ez,ex, y,ez, x, y,ez)
+    #parallel yz plane
+    add_poly(polygon, x,ey, z, x, y, z, x,ey, z)
+    add_poly(polygon, x,ey, z,ex,ey, z,ex, y, z)
+    add_poly(polygon, x, y,ez, x,ey,ez,ex,ey,ez)
+    add_poly(polygon,ex,ey,ez,ex, y,ez, x, y,ez)
+
     add_edge(edge,[x,y,z,x+w,y,z]) #front top
     add_edge(edge,[x,y,z,x,y-h,z]) #front left
     add_edge(edge,[x,y-h,z,x+w,y-h,z]) #front bottom

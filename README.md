@@ -1,2 +1,2 @@
-# graphics-work6-solid
+# graphics-work6-polygons
 solid

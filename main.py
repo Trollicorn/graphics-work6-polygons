@@ -8,7 +8,8 @@ from math import cos,sin,tan,radians
 screen = new_screen()
 color = [ 0, 255, 0 ]
 edges = []
+polygons = []
 transform = new_matrix()
 ident(transform)
 
-parse("script",edges,transform,screen,color)
+parse("script",edges,polygons,transform,screen,color)

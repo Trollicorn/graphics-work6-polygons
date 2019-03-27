@@ -14,7 +14,7 @@ def argify(line):
             pass
     return args
 
-def parse(fname, edge, orders, screen, color):
+def parse(fname, edge, polygon, orders, screen, color):
     transform = {
         "scale": dilate,
         "move": translate,
@@ -24,7 +24,9 @@ def parse(fname, edge, orders, screen, color):
         "line": add_edge,
         "circle": circle,
         "hermite": hermite,
-        "bezier": bezier,
+        "bezier": bezier
+    }
+    solid = {
         "box": box,
         "sphere": sphere,
         "torus": torus
@@ -44,6 +46,10 @@ def parse(fname, edge, orders, screen, color):
             args = f.next()
             args = argify(args)
             shape[line](edge,args)
+        elif line in solid:
+            args = f.next()
+            args = argify(args)
+            solid[line](polygon,args)
         elif line == "apply":
             matrix_mult(orders,edge)
             clear_screen(screen)
