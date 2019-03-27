@@ -22,26 +22,18 @@ def box(polygon, args): #[x,y,z,w,h,d]
     #parallel xy plane
     add_poly(polygon,ex, y, z, x, y, z, x,ey, z)
     add_poly(polygon, x,ey, z,ex,ey, z,ex, y, z)
-    add_poly(polygon, x, y,ez, x,ey,ez,ex,ey,ez)
-    add_poly(polygon,ex,ey,ez,ex, y,ez, x, y,ez)
+    add_poly(polygon, x, y,ez,ex, y,ez,ex,ey,ez)
+    add_poly(polygon,ex,ey,ez, x,ey,ez, x, y,ez)
     #parallel yz plane
-    add_poly(polygon, x,ey, z, x, y, z, x,ey, z)
-    add_poly(polygon, x,ey, z,ex,ey, z,ex, y, z)
-    add_poly(polygon, x, y,ez, x,ey,ez,ex,ey,ez)
-    add_poly(polygon,ex,ey,ez,ex, y,ez, x, y,ez)
-
-    add_edge(edge,[x,y,z,x+w,y,z]) #front top
-    add_edge(edge,[x,y,z,x,y-h,z]) #front left
-    add_edge(edge,[x,y-h,z,x+w,y-h,z]) #front bottom
-    add_edge(edge,[x+w,y,z,x+w,y-h,z]) #front right
-    add_edge(edge,[x,y,z-d,x+w,y,z-d]) #back top
-    add_edge(edge,[x,y,z-d,x,y-h,z-d]) #back left
-    add_edge(edge,[x,y-h,z-d,x+w,y-h,z-d]) #back bottom
-    add_edge(edge,[x+w,y,z-d,x+w,y-h,z-d]) #back right
-    add_edge(edge,[x,y,z,x,y,z-d]) #top left
-    add_edge(edge,[x,y-h,z,x,y-h,z-d]) #bottom left
-    add_edge(edge,[x+w,y,z,x+w,y,z-d]) #top right
-    add_edge(edge,[x+w,y-h,z,x+w,y-h,z-d]) #bottom right
+    add_poly(polygon, x, y,ez, x,ey,ez, x,ey, z)
+    add_poly(polygon, x,ey, z, x, y, z, x, y,ez)
+    add_poly(polygon,ex, y, z,ex,ey, z,ex,ey,ez)
+    add_poly(polygon,ex,ey,ez,ex, y,ez,ex, y, z)
+    #parallel xz plane
+    add_poly(polygon, x, y,ez, x, y, z,ex, y, z)
+    add_poly(polygon,ex, y, z,ex, y,ez, x, y,ez)
+    add_poly(polygon, x,ey, z, x,ey,ez,ex,ey,ez)
+    add_poly(polygon,ex,ey,ez,ex,ey, z, x,ey, z)
 
 def sphere(edge,args): #[x,y,z,r]
     x = args[0]

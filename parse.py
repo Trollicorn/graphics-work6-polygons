@@ -65,10 +65,12 @@ def parse(fname, edge, polygon, orders, screen, color):
         elif line == "display":
             clear_screen(screen)
             draw_lines(edge,screen,color)
+            draw_polygons(polygon,screen,color)
 #            print_matrix(edge)
             display(screen)
         elif line == "clear":
             edge = []
+            polygon = []
         else:
             print line
     f.close()
