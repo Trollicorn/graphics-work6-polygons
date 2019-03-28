@@ -1,12 +1,9 @@
 from display import *
 from matrix import *
-from solid import *
 
 def draw_lines( matrix, screen, color ):
     for i in range(0,len(matrix)-1,2):
-
         #addition
-
         draw_line(matrix[i][0], matrix[i][1], matrix[i+1][0], matrix[i+1][1],screen,color)
 
 def add_edge( matrix, args): #[x0, y0, z0, x1, y1, z1]
@@ -17,11 +14,17 @@ def add_edge( matrix, args): #[x0, y0, z0, x1, y1, z1]
 def add_point( matrix, x, y, z=0 ):
     matrix.append([x,y,z,1])
 
+def add_poly(polygon,x0,y0,z0,x1,y1,z1,x2,y2,z2):
+    add_point(polygon,x0,y0,z0)
+    add_point(polygon,x1,y1,z1)
+    add_point(polygon,x2,y2,z2)
+
 def draw_polygons(polygons, screen, color):
-    for i in range(0,len(matrix)-1,3):
-        draw_line(matrix[i][0], matrix[i][1], matrix[i+1][0], matrix[i+1][1],screen,color)
-        draw_line(matrix[i+1][0], matrix[i+1][1], matrix[i+2][0], matrix[i+2][1],screen,color)
-        draw_line(matrix[i+2][0], matrix[i+2][1], matrix[i][0], matrix[i][1],screen,color)
+    #print(polygons)
+    for i in range(0,len(polygons)-1,3):
+        draw_line(polygons[i][0], polygons[i][1], polygons[i+1][0], polygons[i+1][1],screen,color)
+        draw_line(polygons[i+1][0], polygons[i+1][1], polygons[i+2][0], polygons[i+2][1],screen,color)
+        draw_line(polygons[i+2][0], polygons[i+2][1], polygons[i][0], polygons[i][1],screen,color)
 
 
 def draw_line( x0, y0, x1, y1, screen, color ):

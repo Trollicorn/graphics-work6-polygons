@@ -1,12 +1,6 @@
 from matrix import *
-from draw import *
 from math import cos,sin,pi
-
-
-def add_poly(polygon,x0,y0,z0,x1,y1,z1,x2,y2,z2):
-    add_point(polygon,x0,y0,z0)
-    add_point(polygon,x1,y1,z1)
-    add_point(polygon,x2,y2,z2)
+from draw import *
 
 def box(polygon, args): #[x,y,z,w,h,d]
     x = args[0]
@@ -18,7 +12,6 @@ def box(polygon, args): #[x,y,z,w,h,d]
     ex = x + w
     ey = y - h
     ez = z - d
-
     #parallel xy plane
     add_poly(polygon,ex, y, z, x, y, z, x,ey, z)
     add_poly(polygon, x,ey, z,ex,ey, z,ex, y, z)
@@ -35,49 +28,68 @@ def box(polygon, args): #[x,y,z,w,h,d]
     add_poly(polygon, x,ey, z, x,ey,ez,ex,ey,ez)
     add_poly(polygon,ex,ey,ez,ex,ey, z, x,ey, z)
 
-def sphere(edge,args): #[x,y,z,r]
+def sphere(polygon,args): #[x,y,z,r]
     x = args[0]
     y = args[1]
     z = args[2]
     r = args[3]
-    points = p_sphere(x,y,z,r)
+    n = 20
+    p = p_sphere(x,y,z,r,n)
+    for i in range(len(p)-1):
+        if i % n == 0:
+            add_poly(polygon,p[i][0],p[i][1],p[i][2],p[i+1][0],p[i+1][1],p[i+1][2],p[(i+n+1)%(n*n)][0],p[(i+n+1)%(n*n)][1],p[(i+n+1)%(n*n)][2])
+        elif i % n == n-2:
+            add_poly(polygon,p[i][0],p[i][1],p[i][2],p[i+1][0],p[i+1][1],p[i+1][2],p[(i+n)%(n*n)][0],p[(i+n)%(n*n)][1],p[(i+n)%(n*n)][2])
+#        elif i % n == n-1:
+#            pass
+        else:
+            add_poly(polygon,p[i][0],p[i][1],p[i][2],p[i+1][0],p[i+1][1],p[i+1][2],p[(i+n)%(n*n)][0],p[(i+n)%(n*n)][1],p[(i+n)%(n*n)][2])
+            add_poly(polygon,p[i+1][0],p[i+1][1],p[i+1][2],p[(i+1+n)%(n*n)][0],p[(i+1+n)%(n*n)][1],p[(i+1+n)%(n*n)][2],p[(i+n)%(n*n)][0],p[(i+n)%(n*n)][1],p[(i+n)%(n*n)][2])
 #    print(points)
+
+"""
     for i in range(len(points)):
         px = points[i][0]
         py = points[i][1]
         pz = points[i][2]
         add_edge(edge,[px,py,pz,px+1,py,pz])
-
-def torus(edge,args): #[x,y,z,r1,r2]
+"""
+def torus(polygon,args): #[x,y,z,r1,r2]
     x = args[0]
     y = args[1]
     z = args[2]
     r1 = args[3] #small circles
     r2 = args[4] #big circle
-    points = p_torus(x,y,z,r1,r2)
+    n = 20
+    p = p_torus(x,y,z,r1,r2,n)
+#    print(p)
+    print(len(p))
+    for i in range(len(p)):
+        add_poly(polygon,p[i][0],p[i][1],p[i][2],p[(i+1)%n+i//n*n][0],p[(i+1)%n+i//n*n][1],p[(i+1)%n+i//n*n][2],p[(i+n)%(n*n)][0],p[(i+n)%(n*n)][1],p[(i+n)%(n*n)][2])
+"""
     for i in range(len(points)):
         px = points[i][0]
         py = points[i][1]
         pz = points[i][2]
         add_edge(edge,[px,py,pz,px+1,py,pz])
-
-def p_sphere(x,y,z,r):
+"""
+def p_sphere(x,y,z,r,n):
     points = []
-    num = 25.0
+    num = float(n)
     for i in range(int(num)):
         phi = 2*pi*i/num
         cosphi = cos(phi)
         sinphi = sin(phi)
         for j in range(int(num)):
-            theta = pi*j/num
+            theta = pi*j/(num-1)
             sintheta = sin(theta)
             costheta = cos(theta)
             points.append([int(r*costheta)+x, int(r*sintheta*cosphi)+y, int(r*sintheta*sinphi)+z])
     return points
 
-def p_torus(x,y,z,r1,r2):
+def p_torus(x,y,z,r1,r2,n):
     points = []
-    num = 25.0
+    num = float(n)
     for i in range(int(num)):
         phi = 2*pi*i/num
         cosphi = cos(phi)

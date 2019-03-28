@@ -34,7 +34,7 @@ def parse(fname, edge, polygon, orders, screen, color):
     f = open(fname, 'r')
 
     for line in f:
-#        print(type(line))
+    #    print(type(line))
         line = line[:len(line)-1]
     #    print("[" + line + "]")
         if line in transform:
@@ -52,6 +52,7 @@ def parse(fname, edge, polygon, orders, screen, color):
             solid[line](polygon,args)
         elif line == "apply":
             matrix_mult(orders,edge)
+            matrix_mult(orders,polygon)
             clear_screen(screen)
             draw_lines(edge,screen,color)
         elif line == "ident":
