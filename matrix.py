@@ -82,7 +82,9 @@ def mag(v): #magnitude of vector
 def normal(v): #normal vector
     s = mag(v)
     for i in range(len(v)):
-        v[i] = v[i] / s
+        if v[i]!=0:
+            v[i] = v[i] / s
+    return v
 
 def dot(v1,v2):
     s = 0
@@ -105,8 +107,4 @@ def surf(polygon,index):
     for i in range(3):
         d[i] = b[i]-a[i]
         e[i] = c[i]-a[i]
-    print d
-    print e
-    print cross(d,e)
-    print normal(cross(d,e))
     return normal(cross(d,e))
