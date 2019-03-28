@@ -22,9 +22,14 @@ def add_poly(polygon,x0,y0,z0,x1,y1,z1,x2,y2,z2):
 def draw_polygons(polygons, screen, color):
     #print(polygons)
     for i in range(0,len(polygons)-1,3):
-        draw_line(polygons[i][0], polygons[i][1], polygons[i+1][0], polygons[i+1][1],screen,color)
-        draw_line(polygons[i+1][0], polygons[i+1][1], polygons[i+2][0], polygons[i+2][1],screen,color)
-        draw_line(polygons[i+2][0], polygons[i+2][1], polygons[i][0], polygons[i][1],screen,color)
+        norm = surf(polygons,i)
+        view = [0,0,1]
+        n = dot(norm,view) #cosine theta
+        theta = math.degrees(math.acos(n))
+        if math.fabs(theta) < 90:
+            draw_line(polygons[i][0], polygons[i][1], polygons[i+1][0], polygons[i+1][1],screen,color)
+            draw_line(polygons[i+1][0], polygons[i+1][1], polygons[i+2][0], polygons[i+2][1],screen,color)
+            draw_line(polygons[i+2][0], polygons[i+2][1], polygons[i][0], polygons[i][1],screen,color)
 
 
 def draw_line( x0, y0, x1, y1, screen, color ):

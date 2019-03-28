@@ -47,13 +47,6 @@ def sphere(polygon,args): #[x,y,z,r]
             add_poly(polygon,p[i+1][0],p[i+1][1],p[i+1][2],p[(i+1+n)%(n*n)][0],p[(i+1+n)%(n*n)][1],p[(i+1+n)%(n*n)][2],p[(i+n)%(n*n)][0],p[(i+n)%(n*n)][1],p[(i+n)%(n*n)][2])
 #    print(points)
 
-"""
-    for i in range(len(points)):
-        px = points[i][0]
-        py = points[i][1]
-        pz = points[i][2]
-        add_edge(edge,[px,py,pz,px+1,py,pz])
-"""
 def torus(polygon,args): #[x,y,z,r1,r2]
     x = args[0]
     y = args[1]
@@ -63,16 +56,11 @@ def torus(polygon,args): #[x,y,z,r1,r2]
     n = 20
     p = p_torus(x,y,z,r1,r2,n)
 #    print(p)
-    print(len(p))
+#    print(len(p))
     for i in range(len(p)):
         add_poly(polygon,p[i][0],p[i][1],p[i][2],p[(i+1)%n+i//n*n][0],p[(i+1)%n+i//n*n][1],p[(i+1)%n+i//n*n][2],p[(i+n)%(n*n)][0],p[(i+n)%(n*n)][1],p[(i+n)%(n*n)][2])
-"""
-    for i in range(len(points)):
-        px = points[i][0]
-        py = points[i][1]
-        pz = points[i][2]
-        add_edge(edge,[px,py,pz,px+1,py,pz])
-"""
+        add_poly(polygon,p[(i+1)%n+i//n*n][0],p[(i+1)%n+i//n*n][1],p[(i+1)%n+i//n*n][2],p[((i+1)%n+i//n*n+n)%(n*n)][0],p[((i+1)%n+i//n*n+n)%(n*n)][1],p[((i+1)%n+i//n*n+n)%(n*n)][2],p[(i+n)%(n*n)][0],p[(i+n)%(n*n)][1],p[(i+n)%(n*n)][2])
+
 def p_sphere(x,y,z,r,n):
     points = []
     num = float(n)

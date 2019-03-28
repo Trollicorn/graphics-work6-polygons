@@ -72,3 +72,41 @@ def new_matrix(rows = 4, cols = 4):
         for r in range( rows ):
             m[c].append( 0 )
     return m
+
+def mag(v): #magnitude of vector
+    s = 0
+    for i in v:
+        s += i * i
+    return math.sqrt(s)
+
+def normal(v): #normal vector
+    s = mag(v)
+    for i in range(len(v)):
+        v[i] = v[i] / s
+
+def dot(v1,v2):
+    s = 0
+    for i in range(len(v1)):
+        s += v1[i]*v2[i]
+    return s
+
+def cross(v1,v2): #cross product of 3d vectors
+    x = v1[1]*v2[2] - v1[2]*v2[1]
+    y = v1[2]*v2[0] - v1[0]*v2[2]
+    z = v1[0]*v2[1] - v1[1]*v2[0]
+    return [x,y,z]
+
+def surf(polygon,index):
+    a = polygon[index]
+    b = polygon[index+1]
+    c = polygon[index+2]
+    d = [0,0,0]
+    e = [0,0,0]
+    for i in range(3):
+        d[i] = b[i]-a[i]
+        e[i] = c[i]-a[i]
+    print d
+    print e
+    print cross(d,e)
+    print normal(cross(d,e))
+    return normal(cross(d,e))
