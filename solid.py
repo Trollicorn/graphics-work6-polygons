@@ -37,14 +37,22 @@ def sphere(polygon,args): #[x,y,z,r]
     p = p_sphere(x,y,z,r,n)
     for i in range(len(p)-1):
         if i % n == 0:
-            add_poly(polygon,p[i][0],p[i][1],p[i][2],p[i+1][0],p[i+1][1],p[i+1][2],p[(i+n+1)%(n*n)][0],p[(i+n+1)%(n*n)][1],p[(i+n+1)%(n*n)][2])
+            add_poly(polygon,p[i][0],p[i][1],p[i][2],
+                             p[i+1][0],p[i+1][1],p[i+1][2],
+                             p[(i+n+1)%(n*n)][0],p[(i+n+1)%(n*n)][1],p[(i+n+1)%(n*n)][2])
         elif i % n == n-2:
-            add_poly(polygon,p[i][0],p[i][1],p[i][2],p[i+1][0],p[i+1][1],p[i+1][2],p[(i+n)%(n*n)][0],p[(i+n)%(n*n)][1],p[(i+n)%(n*n)][2])
+            add_poly(polygon,p[i][0],p[i][1],p[i][2],
+                             p[i+1][0],p[i+1][1],p[i+1][2],
+                             p[(i+n)%(n*n)][0],p[(i+n)%(n*n)][1],p[(i+n)%(n*n)][2])
 #        elif i % n == n-1:
 #            pass
         else:
-            add_poly(polygon,p[i][0],p[i][1],p[i][2],p[i+1][0],p[i+1][1],p[i+1][2],p[(i+n)%(n*n)][0],p[(i+n)%(n*n)][1],p[(i+n)%(n*n)][2])
-            add_poly(polygon,p[i+1][0],p[i+1][1],p[i+1][2],p[(i+1+n)%(n*n)][0],p[(i+1+n)%(n*n)][1],p[(i+1+n)%(n*n)][2],p[(i+n)%(n*n)][0],p[(i+n)%(n*n)][1],p[(i+n)%(n*n)][2])
+            add_poly(polygon,p[i][0],p[i][1],p[i][2],
+                             p[i+1][0],p[i+1][1],p[i+1][2],
+                             p[(i+n)%(n*n)][0],p[(i+n)%(n*n)][1],p[(i+n)%(n*n)][2])
+            add_poly(polygon,p[i+1][0],p[i+1][1],p[i+1][2],
+                             p[(i+1+n)%(n*n)][0],p[(i+1+n)%(n*n)][1],p[(i+1+n)%(n*n)][2],
+                             p[(i+n)%(n*n)][0],p[(i+n)%(n*n)][1],p[(i+n)%(n*n)][2])
 #    print(points)
 
 def torus(polygon,args): #[x,y,z,r1,r2]
@@ -58,8 +66,12 @@ def torus(polygon,args): #[x,y,z,r1,r2]
 #    print(p)
 #    print(len(p))
     for i in range(len(p)):
-        add_poly(polygon,p[i][0],p[i][1],p[i][2],p[(i+1)%n+i//n*n][0],p[(i+1)%n+i//n*n][1],p[(i+1)%n+i//n*n][2],p[(i+n)%(n*n)][0],p[(i+n)%(n*n)][1],p[(i+n)%(n*n)][2])
-        add_poly(polygon,p[(i+1)%n+i//n*n][0],p[(i+1)%n+i//n*n][1],p[(i+1)%n+i//n*n][2],p[((i+1)%n+i//n*n+n)%(n*n)][0],p[((i+1)%n+i//n*n+n)%(n*n)][1],p[((i+1)%n+i//n*n+n)%(n*n)][2],p[(i+n)%(n*n)][0],p[(i+n)%(n*n)][1],p[(i+n)%(n*n)][2])
+        add_poly(polygon,p[i][0],p[i][1],p[i][2],
+                         p[(i+1)%n+i//n*n][0],p[(i+1)%n+i//n*n][1],p[(i+1)%n+i//n*n][2],
+                         p[(i+n)%(n*n)][0],p[(i+n)%(n*n)][1],p[(i+n)%(n*n)][2])
+        add_poly(polygon,p[(i+1)%n+i//n*n][0],p[(i+1)%n+i//n*n][1],p[(i+1)%n+i//n*n][2],
+                         p[((i+1)%n+i//n*n+n)%(n*n)][0],p[((i+1)%n+i//n*n+n)%(n*n)][1],p[((i+1)%n+i//n*n+n)%(n*n)][2],
+                         p[(i+n)%(n*n)][0],p[(i+n)%(n*n)][1],p[(i+n)%(n*n)][2])
 
 def p_sphere(x,y,z,r,n):
     points = []

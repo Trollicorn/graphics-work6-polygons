@@ -25,7 +25,7 @@ for i in range(num):
     f.write("save\nuse"+str(i)+".png\n")
     f.close()
     parse("epic"+str(i)+".txt",edges,polygons,transform,screen,color)
-#    remove("epic"+str(i)+".txt")
+    remove("epic"+str(i)+".txt")
 
 f = open("gif.sh",'w')
 f.write("#!/bin/bash\n\n")
