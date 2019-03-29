@@ -55,6 +55,7 @@ def parse(fname, edge, polygon, orders, screen, color):
             matrix_mult(orders,polygon)
             clear_screen(screen)
             draw_lines(edge,screen,color)
+            draw_polygons(polygon,screen,color)
         elif line == "ident":
             orders = new_matrix()
             ident(orders)

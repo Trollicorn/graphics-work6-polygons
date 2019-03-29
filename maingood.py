@@ -11,6 +11,7 @@ for i in range(num):
     screen = new_screen()
     color = [ 255, 255, 255 ]
     edges = []
+    polygons = []
     transform = new_matrix()
     ident(transform)
     f = open("epic" + str(i) + ".txt",'w')
@@ -23,8 +24,8 @@ for i in range(num):
     f.write("apply\n")
     f.write("save\nuse"+str(i)+".png\n")
     f.close()
-    parse("epic"+str(i)+".txt",edges,transform,screen,color)
-    remove("epic"+str(i)+".txt")
+    parse("epic"+str(i)+".txt",edges,polygons,transform,screen,color)
+#    remove("epic"+str(i)+".txt")
 
 f = open("gif.sh",'w')
 f.write("#!/bin/bash\n\n")
