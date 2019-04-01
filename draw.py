@@ -23,10 +23,11 @@ def draw_polygons(polygons, screen, color):
     #print(polygons)
     for i in range(0,len(polygons)-1,3):
         norm = surf(polygons,i)
-        view = [0,0,1]
-        n = dot(norm,view) #cosine theta
-        theta = math.degrees(math.acos(n))
-        if math.fabs(theta) < 90:
+#        view = [0,0,1]
+#        n = dot(norm,view) #cosine theta
+#        theta = math.degrees(math.acos(n))
+#        if math.fabs(theta) < 90:
+        if norm[2] > 0:
             draw_line(polygons[i][0], polygons[i][1], polygons[i+1][0], polygons[i+1][1],screen,color)
             draw_line(polygons[i+1][0], polygons[i+1][1], polygons[i+2][0], polygons[i+2][1],screen,color)
             draw_line(polygons[i+2][0], polygons[i+2][1], polygons[i][0], polygons[i][1],screen,color)
